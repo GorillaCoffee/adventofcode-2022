@@ -8,6 +8,14 @@ defmodule AOC2022.Day3 do
     |> Enum.sum()
   end
 
+  def sum_of_priorities_for_each_three_elf_group do
+    rutsacks
+    |> Enum.chunk_every(3)
+    |> Enum.map(&common_item_type_in_group_of_rutsacks/1)
+    |> Enum.map(&priority_for_item_type/1)
+    |> Enum.sum()
+  end
+
   def priority_for_item_type(item_type) do
     char_binary = :binary.first(item_type)
 
@@ -16,6 +24,16 @@ defmodule AOC2022.Day3 do
     else
       char_binary - 38
     end
+  end
+
+  def common_item_type_in_group_of_rutsacks(rutsack_group) do
+    [rutsack_a, rutsack_b, rutsack_c] = rutsack_group
+
+    rutsack_a
+    |> String.graphemes()
+    |> Enum.find(fn item ->
+      is_item_in_compartment(item, rutsack_b) && is_item_in_compartment(item, rutsack_c)
+    end)
   end
 
   def common_item_type_in_rutsack_compartments(rutsack) do
