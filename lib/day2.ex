@@ -16,7 +16,7 @@ defmodule AOC2022.Day2 do
     opponent_shape = map_column_a(column_a)
     your_shape = map_column_b(column_b, strategy)
 
-    outcome = interaction_outcome(opponent_shape, your_shape)
+    outcome = outcome_for_shapes(opponent_shape, your_shape)
 
     calculate_round_points(your_shape, outcome)
   end
@@ -57,7 +57,7 @@ defmodule AOC2022.Day2 do
     paper: 1,
     scissors: 2
   }
-  def interaction_outcome(opponent_shape, your_shape) do
+  def outcome_for_shapes(opponent_shape, your_shape) do
     opponent_shape_power = Map.get(@shape_numerical_power, opponent_shape)
     your_shape_power = Map.get(@shape_numerical_power, your_shape)
 
