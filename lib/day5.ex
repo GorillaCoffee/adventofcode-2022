@@ -53,15 +53,9 @@ defmodule AOC2022.Day5 do
     column_from = Enum.drop(column_from, count)
     column_to = crates_being_moved ++ column_to
 
-    columns = columns
+    columns
               |> Map.put(from_i, column_from)
               |> Map.put(to_i, column_to)
-
-    render_state(columns)
-    IO.inspect("{#{count}, #{from}, #{to}}")
-
-    
-    columns
   end 
   
   def apply_move(count, from, to, columns, :cratemover_9000) do
@@ -78,11 +72,6 @@ defmodule AOC2022.Day5 do
           columns = columns
           |> Map.put(from_i, column_from)
           |> Map.put(to_i, column_to)
-          
-          render_state(columns)
-          IO.inspect("{#{count}, #{from}, #{to}}")
-
-          columns
         _ ->
           columns
       end
