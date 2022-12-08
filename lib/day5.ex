@@ -112,12 +112,6 @@ defmodule AOC2022.Day5 do
     |> Enum.map(&Tuple.to_list/1)
   end
 
-  def to_number(str) do
-    {number, _} = Integer.parse(str)
-
-    number
-  end
-  
   def render_state(state) do
     state
     |> Enum.map(fn {index, column} ->

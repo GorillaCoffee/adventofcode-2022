@@ -38,10 +38,4 @@ defmodule AOC2022.Day4 do
     |> String.split("\n")
     |> Enum.reject(&Kernel.==(&1, ""))
   end
-
-  def to_number(str) do
-    {number, _} = Integer.parse(str)
-
-    number
-  end
 end
