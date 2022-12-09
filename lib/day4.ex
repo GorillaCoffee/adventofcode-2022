@@ -17,7 +17,9 @@ defmodule AOC2022.Day4 do
     range_1_str = Enum.join(range_1)
     range_2_str = Enum.join(range_2)
 
-    range_1_str =~ range_2_str || range_2_str =~ range_1_str
+    result = range_1 -- range_2 != range_1 || range_2 -- range_1 != range_2 
+    IO.inspect(result)
+    result
   end
 
   def input_row_to_list_of_integers(row_str) do
