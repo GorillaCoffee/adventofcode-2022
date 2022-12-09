@@ -4,24 +4,24 @@ defmodule AOC2022.Day7 do
   def answer_1() do
     file_tree()
     |> Map.get(:tree)
-    |> total_dir_size(0)
+    |> total_dir_size()
   end
-  
-  def total_dir_size(tree, sum) do
+
+  def total_dir_size(tree, dir_to_delete \\ %{dir_name: nil, size: 999999999}) when is_map(tree) do
     tree
     |> Enum.to_list()
-    |> Enum.reduce({0, sum}, fn {_, value}, {total, sum} ->
+    |> Enum.reduce({0, dir_to_delete}, fn {dir_name, value}, {total_dir_size, dir_to_delete} ->
       case value do
         tree when is_map(tree) ->
-          {dir_total, dir_sum} = total_dir_size(tree, sum)
+          {dir_size, %{dir_name: dir_to_delete_name, size: dir_to_delete_size} = dir_to_delete} = total_dir_size(tree, dir_to_delete)
           
-          if dir_total <= 100000 do
-            {dir_total + total, dir_total + dir_sum + sum}
+          if dir_size >= 8381165 && dir_size < dir_to_delete_size do
+            {dir_size + total_dir_size, %{dir_name: dir_name, size: dir_size}}
           else
-            {dir_total + total, dir_total + sum}
+            {dir_size + total_dir_size, dir_to_delete}
           end
         value ->
-          {value + total, sum}
+          {value + total_dir_size, dir_to_delete}
       end
     end)
   end
